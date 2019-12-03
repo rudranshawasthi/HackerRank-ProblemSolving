@@ -1,0 +1,74 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the gameOfThrones function below.
+    static String gameOfThrones(String s) {
+        int i,freq,count=0,even=0,odd=0;
+        char ch;
+        boolean flag = false;
+        HashSet<Character> set = new LinkedHashSet();
+        for(i=0;i<s.length();i++)        
+            set.add(s.charAt(i));
+        ArrayList<Character> al = new ArrayList();
+        for(i=0;i<s.length();i++)        
+            al.add(s.charAt(i));        
+        for(Object o:set)
+        {
+            ch = (char)o;            
+            freq = Collections.frequency(al, ch);            
+            if(s.length()%2==0)
+            {    
+                if(freq%2!=0)
+                {
+                    flag = false;
+                    break;
+                }
+                else
+                {
+                    flag = true;
+                    continue;
+                }
+            }
+            else
+            {
+                if(freq%2==0)                
+                    even++;                
+                else
+                    odd++;
+            }
+            if(even==set.size()-1)
+                flag=true;
+            else
+                flag=false;            
+        }
+        if(flag==false)        
+            return "NO";
+        else
+            return "YES";
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        String result = gameOfThrones(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
