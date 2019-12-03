@@ -1,0 +1,50 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    /*
+     * Complete the timeConversion function below.
+     */
+    static String timeConversion(String s) {
+         String a;  
+         a=s.substring(0,2);
+          
+         int y,x=Integer.parseInt(a);
+         if(a.equals("12")) { 
+             if(s.charAt(8)=='P') 
+                 a=a+s.substring(2,8);
+             else
+                 a="00"+s.substring(2,8);                 
+            }
+         else {
+         if(s.charAt(8)=='P') 
+              y=x+12;
+         else
+             y=x;
+         a= Integer.toString(y);
+         a=a+s.substring(2,8);
+         }
+         if(a.length()!=8)
+            a="0"+a;
+        return a;
+    }
+
+    private static final Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scan.nextLine();
+
+        String result = timeConversion(s);
+
+        bw.write(result);
+        bw.newLine();
+
+        bw.close();
+    }
+}
